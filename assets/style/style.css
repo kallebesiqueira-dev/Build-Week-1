@@ -1,0 +1,197 @@
+body {
+    background-image: url("../img/bg.jpg");
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.logoContainer,
+header {
+    width: 100%;
+}
+
+.logoContainer img {
+    width: 145px;
+    height: 33px;
+    padding: 3% 5%;
+}
+
+.title {
+    height: 40vh;
+}
+
+h1 {
+    color: white;
+    font-family: "Outfit";
+    font-size: 60px;
+    line-height: 55px;
+}
+
+h1 span {
+    font-weight: lighter;
+}
+
+h2 {
+    color: #d20094;
+    font-size: 30px;
+    margin: 0;
+}
+
+.mainText {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    padding: 1% 0 0 5%;
+    font-family: "Outfit";
+}
+
+.mainText p {
+    color: white;
+    font-family: "Inter";
+    font-size: 15px;
+    margin: 0;
+}
+
+.instruction {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    padding: 0 5%;
+    font-family: "Inter";
+    color: white;
+}
+
+.instruction p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.description {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 5%;
+}
+
+.description ul {
+    color: white;
+    font-family: "Inter";
+    font-size: 16px;
+    width: 100%;
+    margin-top: 2%;
+    padding-left: 20px;
+}
+
+.description li {
+    padding: 0.2%;
+}
+
+.proceed {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 5%;
+    font-family: "Inter";
+    font-size: 16px;
+}
+
+.proceed p {
+    font-size: 12px;
+    font-weight: bolder;
+    padding-left: 0.5%;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid white;
+    background-color: transparent;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]:checked {
+    background-color: white;
+}
+
+/* Spunta al click della checkbox  */
+input[type="checkbox"]:checked::before {
+    content: "";
+    width: 5px;
+    height: 9px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-top: -2px;
+}
+
+.proceedBtn {
+    width: 180px;
+    height: 53px;
+    background-color: #00ffff;
+    color: black;
+    font-weight: bolder;
+    font-size: 19px;
+    border: none;
+    margin-left: 24%;
+    box-shadow: 0 0 30px rgba(25, 246, 255, 0.9);
+    cursor: pointer;
+}
+
+
+.timerContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: absolute;
+    top: 40px;
+    left: 850px;
+}
+
+.timer {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    background: radial-gradient(closest-side, #1e0b36 79%, transparent 80% 100%),
+        conic-gradient(#00ffff 100%, 0, #5b5b5b) border-box;
+}
+
+.timer-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    line-height: normal
+}
+
+.secondi {
+    font-family: "Inter";
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    font-family: "Outfit", sans-serif;
+    line-height: 1;
+    margin: 2px 0;
+}
+
+.label {
+    font-family: "Inter";
+    font-size: 9px;
+    font-weight: 500;
+    color: white;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+}

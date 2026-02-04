@@ -97,24 +97,46 @@ const questions = [
 window.addEventListener("load", function () {
   // Bottone di prova per il timer
   let prova = document.querySelector("#contoRovescia");
-  prova.addEventListener("click", () => updateTimer());
+  // prova.addEventListener("click", () => startTimer());
   // Fine bottone di prova
+
+  let timerElement = document.querySelector(".timer");
 });
 
+const TIMELIMIT = 30;
+let timePassed = 0;
+let timeLeft = TIMELIMIT;
+
+startTimer();
 // Funzione per fare il conto alla rovescia
-function updateTimer() {
-  let tempo = 30;
-  // Provo a iniettare il conto nel body
+function startTimer() {
+  let secondiElement = this.document.querySelector(".secondi");
+  const circleElement = document.querySelector(".timer");
+
+  // Provo a iniettare il tempo rimanente
   let container = document.querySelector("body");
   let elemento = document.createElement("p");
+  secondiElement.textContent = timeLeft;
+
   const timerId = setInterval(() => {
-    console.log(tempo);
-    elemento.textContent = tempo;
-    tempo--;
-    if (tempo < 0) {
+    console.log(timeLeft);
+    timePassed++;
+    timeLeft = TIMELIMIT - timePassed;
+    updateCircle(circleElement);
+    if (timePassed == 30) {
       clearInterval(timerId);
       console.log("Timer scaduto!");
     }
+    secondiElement.textContent = timeLeft;
   }, 1000);
   container.appendChild(elemento);
+}
+
+function updateCircle(element) {
+  const percentage = (timePassed / TIMELIMIT) * 100;
+
+  element.style.background = `
+    radial-gradient(closest-side, #1e0b36 79%, transparent 80% 100%),
+    conic-gradient(#5b5b5b  ${percentage}%, #00ffff 0)
+  `;
 }
