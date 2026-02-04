@@ -267,7 +267,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const storedScore = Number(localStorage.getItem("quizScore") || "0");
     const storedTotal = Number(localStorage.getItem("quizTotal") || "10");
     const passed = (localStorage.getItem("quizPassed") || "false") === "true";
-    resultScore.innerHTML = `Score: <span class="result-number">${storedScore}</span> / <strong class="result-total">${storedTotal}</strong>`;
+    
+    // Build result score DOM safely to avoid XSS
+    resultScore.textContent = "Score: ";
+    const scoreNumber = document.createElement("span");
+    scoreNumber.className = "result-number";
+    scoreNumber.textContent = storedScore.toString();
+    resultScore.appendChild(scoreNumber);
+    resultScore.appendChild(document.createTextNode(" / "));
+    const totalStrong = document.createElement("strong");
+    totalStrong.className = "result-total";
+    totalStrong.textContent = storedTotal.toString();
+    resultScore.appendChild(totalStrong);
+    
     resultMessage.textContent = passed
       ? "Congratulations, you passed!"
       : "It wasn't this time, try again!";
