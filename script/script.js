@@ -163,9 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Decodifica entità HTML presenti nelle domande
   const decodeHTML = (text) => {
-    const textarea = document.createElement("textarea");
-    textarea.textContent = text;
-    return textarea.innerHTML;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    return doc.documentElement.textContent;
   };
 
   // Mescola le risposte per evitare ordine fisso
