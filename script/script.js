@@ -159,13 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let remaining = 30;
   const totalTime = 30;
   let score = 0;
-  const passThreshold = 0.6;
+  const passThreshold = 0.6; // 60% correct answers required to pass the quiz
 
   // Decodifica entità HTML presenti nelle domande
   const decodeHTML = (text) => {
     const textarea = document.createElement("textarea");
-    textarea.innerHTML = text;
-    return textarea.value;
+    textarea.textContent = text;
+    return textarea.innerHTML;
   };
 
   // Mescola le risposte per evitare ordine fisso
@@ -278,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (resultMessage && resultScore) {
     const storedScore = Number(localStorage.getItem("quizScore") || "0");
-    const storedTotal = Number(localStorage.getItem("quizTotal") || "10");
+    const storedTotal = Number(localStorage.getItem("quizTotal") || totalQuestions.toString());
     const passed = (localStorage.getItem("quizPassed") || "false") === "true";
     
     // Build result score DOM safely to avoid XSS
