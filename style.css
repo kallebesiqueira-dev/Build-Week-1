@@ -126,3 +126,23 @@ input[type="checkbox"]:checked::before {
   box-shadow: 0 0 30px rgba(25, 246, 255, 0.9);
   cursor: pointer;
 }
+
+.titoloFinal {
+  color: white;
+  font-family: "Outfit";
+  font-size: 60px;
+  line-height: 55px;
+  display: flex;
+  justify-content: center;
+}
+
+.punteggio {
+  border: solid 2px #d200935e;
+  width: 50%;
+   min-height: 120px;
+  margin: 20px auto;
+  padding: 20px;
+  color: white;
+  border-radius: 20px;
+  background-color:#d2009321 ;
+}
