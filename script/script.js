@@ -94,40 +94,29 @@ const questions = [
   },
 ];
 
+
+
 /* window.addEventListener("load", function () {
   // Bottone di prova per il timer
   let prova = document.querySelector("#contoRovescia");
-  // prova.addEventListener("click", () => startTimer());
+  prova.addEventListener("click", () => updateTimer());
   // Fine bottone di prova
-
-  let timerElement = document.querySelector(".timer");
 });
 
-const TIMELIMIT = 30;
-let timePassed = 0;
-let timeLeft = TIMELIMIT;
-
-startTimer();
 // Funzione per fare il conto alla rovescia
-function startTimer() {
-  let secondiElement = this.document.querySelector(".secondi");
-  const circleElement = document.querySelector(".timer");
-
-  // Provo a iniettare il tempo rimanente
+function updateTimer() {
+  let tempo = 30;
+  // Provo a iniettare il conto nel body
   let container = document.querySelector("body");
   let elemento = document.createElement("p");
-  secondiElement.textContent = timeLeft;
-
   const timerId = setInterval(() => {
-    console.log(timeLeft);
-    timePassed++;
-    timeLeft = TIMELIMIT - timePassed;
-    updateCircle(circleElement);
-    if (timePassed == 30) {
+    console.log(tempo);
+    elemento.textContent = tempo;
+    tempo--;
+    if (tempo < 0) {
       clearInterval(timerId);
       console.log("Timer scaduto!");
     }
-    secondiElement.textContent = timeLeft;
   }, 1000);
   container.appendChild(elemento);
 }  */
@@ -161,13 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const timerValue = document.getElementById("timerValue");
   const timerRing = document.querySelector(".timer");
 
-  const isQuestionPage = !!(
-    questionTitle &&
-    questionOptions &&
-    questionFooter &&
-    timerValue &&
-    timerRing
-  );
+  const isQuestionPage = !!(questionTitle && questionOptions && questionFooter && timerValue && timerRing);
 
   // Stato del quiz
   const totalQuestions = questions.length;
@@ -181,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Decodifica entità HTML presenti nelle domande
   const decodeHTML = (text) => {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(text, "text/html");
+    const doc = parser.parseFromString(text, 'text/html');
     return doc.documentElement.textContent;
   };
 
@@ -237,12 +220,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const correctDecoded = decodeHTML(current.correct_answer);
 
     questionTitle.textContent = decodeHTML(current.question);
-
+    
     // Clear previous options safely
     while (questionOptions.firstChild) {
       questionOptions.removeChild(questionOptions.firstChild);
     }
-
+    
     answers.forEach((answer) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -279,10 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       localStorage.setItem("quizScore", score.toString());
       localStorage.setItem("quizTotal", totalQuestions.toString());
-      localStorage.setItem(
-        "quizPassed",
-        (score / totalQuestions >= passThreshold).toString(),
-      );
+      localStorage.setItem("quizPassed", ((score / totalQuestions) >= passThreshold).toString());
       window.location.href = "pagina3.html";
     }
   };
@@ -298,11 +278,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (resultMessage && resultScore) {
     const storedScore = Number(localStorage.getItem("quizScore") || "0");
-    const storedTotal = Number(
-      localStorage.getItem("quizTotal") || totalQuestions.toString(),
-    );
+    const storedTotal = Number(localStorage.getItem("quizTotal") || totalQuestions.toString());
     const passed = (localStorage.getItem("quizPassed") || "false") === "true";
-
+    
     // Build result score DOM safely to avoid XSS
     resultScore.textContent = "Score: ";
     const scoreNumber = document.createElement("span");
@@ -314,18 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
     totalStrong.className = "result-total";
     totalStrong.textContent = storedTotal.toString();
     resultScore.appendChild(totalStrong);
-
+    
     resultMessage.textContent = passed
       ? "Congratulations, you passed!"
       : "You didn't pass this time. Try again!";
   }
 });
-
-function updateCircle(element) {
-  const percentage = (timePassed / TIMELIMIT) * 100;
-
-  element.style.background = `
-    radial-gradient(closest-side, #1e0b36 79%, transparent 80% 100%),
-    conic-gradient(#5b5b5b  ${percentage}%, #00ffff 0)
-  `;
-}
