@@ -130,6 +130,16 @@ function startTimer() {
     secondiElement.textContent = timeLeft;
   }, 1000);
   container.appendChild(elemento);
+
+  function updateCircle(element) {
+  const percentage = (timePassed / TIMELIMIT) * 100;
+
+  element.style.background = `
+    radial-gradient(closest-side, #1e0b36 79%, transparent 80% 100%),
+    conic-gradient(#5b5b5b  ${percentage}%, #00ffff 0)
+  `;
+}
+
 }  */
 
 // ==== Ho fatto qui sotto vedi se ti serve qualche codice ====
@@ -320,12 +330,3 @@ document.addEventListener("DOMContentLoaded", () => {
       : "You didn't pass this time. Try again!";
   }
 });
-
-function updateCircle(element) {
-  const percentage = (timePassed / TIMELIMIT) * 100;
-
-  element.style.background = `
-    radial-gradient(closest-side, #1e0b36 79%, transparent 80% 100%),
-    conic-gradient(#5b5b5b  ${percentage}%, #00ffff 0)
-  `;
-}
